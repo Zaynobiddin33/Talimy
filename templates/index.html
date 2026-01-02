@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {%load static%}
 
+{%block head%}
+<link rel="preload" as="image" href="{% static 'assets/images/hero/h-dark.png' %}">
+<link rel="preload" as="image" href="{% static 'assets/images/hero/h-light.png' %}">
+{%endblock%}
+
 {%block style%}
 <style>
   /* Keep logos in a single row; when they overflow horizontally they auto-scroll */
