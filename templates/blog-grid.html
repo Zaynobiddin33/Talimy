@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block content%}
+        <section class="py-20">
+          <div class="wrapper">
+            <div class="mx-auto max-w-md text-center mb-14">
+              <h2
+                class="text-4xl font-bold text-gray-800 mb-2 dark:text-white/90"
+              >
+                Latest Posts & Blogs
+              </h2>
+              <p class="text-gray-700 text-base dark:text-gray-400">
+                See all the latest posts & blogs we have ever written.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {%for blog in blogs%}
+              <article class="overflow-hidden">
+                <a href="{%url 'blog_detail' blog.id%}" class="">
+                  <img
+                    src="{{blog.poster.url}}"
+                    alt="People collaborating on laptops"
+                    class="w-full h-48 object-cover rounded-[20px]"
+                  />
+                </a>
+                <div class="mt-6">
+                  <div class="flex items-center text-sm text-gray-500 mb-3">
+                    <span class="dark:text-gray-400">By {{blog.owner.first_name}} {{blog.owner.last_name}}</span>
+                    <span class="mx-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="6"
+                        height="6"
+                        viewBox="0 0 6 6"
+                        fill="none"
+                      >
+                        <circle cx="3" cy="3.00177" r="3" fill="#98A2B3" />
+                      </svg>
+                    </span>
+                    <span class="dark:text-gray-400">{{blog.published_at.date}}</span>
+                  </div>
+                  <h3
+                    class="text-2xl font-semibold text-gray-800 dark:text-white/90 mb-3"
+                  >
+                    <a href="blog-details.html">
+                      {{blog.title}}
+                    </a>
+                  </h3>
+                  <p class="text-gray-500 dark:text-gray-400">
+                    {{blog.subtitle}}
+                  </p>
+                </div>
+              </article>
+              {%endfor%}
+              
+            </div>
+
+            <div class="flex justify-center mt-14 items-center space-x-2">
+              <!-- Previous button -->
+               {%if blogs.has_previous%}
+               <a href="?page={{ page_obj.previous_page_number }}">
+                <button
+                  class="px-4 h-10 py-2 border border-gray-300 shadow-theme-xs rounded-lg inline-flex justify-center items-center text-sm font-medium text-gray-700 bg-white dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800 hover:bg-gray-50">Previous
+                </button>
+              </a>
+              {%endif%}
+
+              <!-- Page 1 (active) -->
+               {% for num in blogs.paginator.page_range %}
+              <a href="?page={{num}}">
+                <button
+                  class=" {% if blogs.number == num %} 
+                          px-4 py-2 size-10 rounded-md text-sm font-medium inline-flex justify-center items-center text-white bg-primary-500 hover:bg-primary-600
+                          {%else%}
+                          px-4 py-2 size-10 inline-flex justify-center items-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md text-sm font-medium text-gray-700 dark:text-gray-400
+                          {%endif%}">
+                  {{num}}
+                </button>
+              </a>
+              {%endfor%}
+
+              
+
+              <!-- Next button -->
+               {%if blogs.has_next%}
+               <a href="?page={{ page_obj.next_page_number }}">
+                <button
+                  class="px-4 h-10 py-2 border border-gray-300 shadow-theme-xs rounded-lg inline-flex justify-center items-center text-sm font-medium text-gray-700 bg-white dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800 hover:bg-gray-50"
+                >
+                  Next
+                </button>
+              </a>
+              {%endif%}
+            </div>
+          </div>
+        </section>
+{%endblock%}

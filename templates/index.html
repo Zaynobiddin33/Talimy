@@ -1,0 +1,835 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block style%}
+<style>
+  /* Keep logos in a single row; when they overflow horizontally they auto-scroll */
+.logo-scroll-track {
+  display: flex;
+  gap: 3.5rem; /* spacing between logos */
+  animation: scrollBackForth 5s ease-in-out infinite alternate; /* left-right animation */
+}
+
+.logo-scroll-track img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.logo-cont {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 1rem; /* Tailwind rounded-2xl */
+  overflow: hidden; /* contain logos inside box */
+}
+
+@keyframes scrollBackForth {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50px); } /* move left by 50px, adjust as needed */
+}
+
+
+
+
+</style>
+{%endblock%}
+
+{%block content%}
+<section 
+  class="pt-16 pb-16 relative overflow-hidden bg-cover bg-center lg:min-h-screen"
+  :style="darkMode 
+    ? `background-image: url({% static 'assets/images/hero/h-dark.png' %}); background-size: cover; background-position: center center;`
+    : `background-image: url({% static 'assets/images/hero/h-light.png' %}); background-size: cover; background-position: center center;`"
+>
+          <div class="wrapper">
+            <div class="max-w-[800px] mx-auto">
+              <div class="text-center pb-16">
+                <div
+                  class="rounded-full mb-6 h-10 gradient-border inline-flex items-center"
+                >
+                  <div
+                    class="bg-white dark:bg-dark-primary py-2 text-sm items-center gap-2 px-5 inline-flex dark:text-white/90 rounded-full z-10 relative"
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M15.1699 0.58575C14.9429 -0.19525 13.7499 -0.19525 13.5229 0.58575L13.2029 1.69275C12.5109 4.07875 11.5669 5.94175 8.99994 6.58375L7.80794 6.88175C7.63097 6.91697 7.47168 7.01246 7.35721 7.15195C7.24274 7.29144 7.18018 7.4663 7.18018 7.64675C7.18018 7.8272 7.24274 8.00206 7.35721 8.14155C7.47168 8.28104 7.63097 8.37653 7.80794 8.41175L8.99994 8.70975C11.5669 9.35275 12.5109 11.2157 13.2029 13.6007L13.5229 14.7078C13.7499 15.4897 14.9429 15.4897 15.1699 14.7078L15.4899 13.6007C16.1819 11.2157 17.1269 9.35275 19.6939 8.71075L20.8839 8.41175C21.0609 8.37653 21.2202 8.28104 21.3347 8.14155C21.4491 8.00206 21.5117 7.8272 21.5117 7.64675C21.5117 7.4663 21.4491 7.29144 21.3347 7.15195C21.2202 7.01246 21.0609 6.91697 20.8839 6.88175L19.6939 6.58375C17.1269 5.94175 16.1819 4.07875 15.4899 1.69375L15.1699 0.58575Z"
+                        fill="url(#paint0_linear_9274_1469)"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.28304 11.8368C5.14704 11.3488 4.43104 11.3488 4.29604 11.8368L4.10304 12.5288C3.68805 14.0188 3.12205 15.1838 1.58104 15.5858L0.867045 15.7718C0.759268 15.7971 0.663206 15.8581 0.594451 15.9448C0.525695 16.0316 0.488281 16.1391 0.488281 16.2498C0.488281 16.3605 0.525695 16.4679 0.594451 16.5547C0.663206 16.6415 0.759268 16.7025 0.867045 16.7278L1.58104 16.9148C3.12104 17.3158 3.68805 18.4808 4.10304 19.9708L4.29604 20.6628C4.43104 21.1518 5.14704 21.1518 5.28304 20.6628L5.47605 19.9708C5.89005 18.4808 6.45805 17.3158 7.99804 16.9148L8.71204 16.7278C8.81982 16.7025 8.91588 16.6415 8.98464 16.5547C9.05339 16.4679 9.09081 16.3605 9.09081 16.2498C9.09081 16.1391 9.05339 16.0316 8.98464 15.9448C8.91588 15.8581 8.81982 15.7971 8.71204 15.7718L7.99804 15.5858C6.45805 15.1848 5.89005 14.0198 5.47605 12.5288L5.28304 11.8368Z"
+                        fill="url(#paint1_linear_9274_1469)"
+                      />
+                      <defs>
+                        <linearGradient
+                          id="paint0_linear_9274_1469"
+                          x1="7.18018"
+                          y1="0"
+                          x2="21.5117"
+                          y2="15.2943"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#FF58D5" />
+                          <stop offset="1" stop-color="#FFA0E7" />
+                        </linearGradient>
+                        <linearGradient
+                          id="paint1_linear_9274_1469"
+                          x1="9.09081"
+                          y1="11.4708"
+                          x2="0.488281"
+                          y2="21.0295"
+                          gradientUnits="userSpaceOnUse"
+                        >
+                          <stop stop-color="#7A5AF8" />
+                          <stop offset="1" stop-color="#B5A2FF" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <p>Talimy is the way to grow</p>
+                  </div>
+                </div>
+                <h1
+                  class="text-gray-700 mx-auto font-bold mb-4 text-4xl sm:text-[50px] dark:text-white/90 sm:leading-[64px] max-w-[700px]"
+                >
+                  Pioneering National Youth Research in Uzbekistan
+                </h1>
+                <p
+                  class="max-w-[537px] text-center mx-auto dark:text-gray-400 text-gray-500 text-base"
+                >
+                Developing a national ecosystem for youth research and innovation in Uzbekistan</p>
+                <div
+                  class="mt-9 flex sm:flex-row flex-col gap-3 relative z-30 items-center justify-center"
+                >
+                  <a
+                    href="{%url 'register'%}"
+                    class="bg-primary-500 transition h-12 inline-flex items-center justify-center hover:bg-primary-600 px-6 py-3 rounded-full text-white text-sm"
+                    >Join Talimy</a
+                  >
+                  <a
+                    href="https://youtu.be/u5Pme31UDhQ?si=hlScneVQUSLaSPEt"
+                    class="rounded-full video-popup flex h-12 gap-3 items-center text-sm border bg-white dark:bg-white/10 dark:border-white/[0.05] dark:text-white border-gray-100 p-1.5 pr-6"
+                  >
+                    <span
+                      class="size-9 rounded-full gradient-bg-two inline-flex items-center justify-center text-sm font-medium"
+                    >
+                      <svg
+                        width="16"
+                        height="17"
+                        viewBox="0 0 16 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 3.71077L3.5 12.3482C3.5 13.5211 4.78545 14.2402 5.78489 13.6265L12.8183 9.30776C13.7717 8.7223 13.7717 7.33672 12.8183 6.75125L5.7849 2.43251C4.78545 1.81882 3.5 2.53795 3.5 3.71077Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </span>
+                    Watch Intro
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="max-w-[1000px] mx-auto relative">
+              <div
+                class="p-3 sm:p-[18px] relative z-30 rounded-[32px] border border-white/30 dark:border-white/10 bg-white/20"
+              >
+                <img
+                  src="{% static 'assets/images/hero/hero-img.jpg'%}"
+                  alt=""
+                  class="w-full rounded-2xl block dark:hidden"
+                />
+                <img
+                  src="{% static 'assets/images/hero/hero-img-dark.png'%}"
+                  alt=""
+                  class="w-full rounded-2xl hidden dark:block"
+                />
+              </div>
+              <div
+                class="absolute hidden lg:block z-10 -top-20 -translate-y-20 left-1/2 -translate-x-1/2"
+              >
+                <svg
+                  width="1300"
+                  height="1001"
+                  viewBox="0 0 1300 1001"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.7" filter="url(#filter0_f_9279_7148)">
+                    <circle cx="800" cy="500.03" r="300" fill="#4E6EFF" />
+                  </g>
+                  <g opacity="0.3" filter="url(#filter1_f_9279_7148)">
+                    <circle cx="500" cy="500.03" r="300" fill="#FF58D5" />
+                  </g>
+                  <defs>
+                    <filter
+                      id="filter0_f_9279_7148"
+                      x="300"
+                      y="0.029541"
+                      width="1000"
+                      height="1000"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                    >
+                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feBlend
+                        mode="normal"
+                        in="SourceGraphic"
+                        in2="BackgroundImageFix"
+                        result="shape"
+                      />
+                      <feGaussianBlur
+                        stdDeviation="100"
+                        result="effect1_foregroundBlur_9279_7148"
+                      />
+                    </filter>
+                    <filter
+                      id="filter1_f_9279_7148"
+                      x="0"
+                      y="0.029541"
+                      width="1000"
+                      height="1000"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                    >
+                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feBlend
+                        mode="normal"
+                        in="SourceGraphic"
+                        in2="BackgroundImageFix"
+                        result="shape"
+                      />
+                      <feGaussianBlur
+                        stdDeviation="100"
+                        result="effect1_foregroundBlur_9279_7148"
+                      />
+                    </filter>
+                  </defs>
+                </svg>
+              </div>
+            </div> -->
+          </div>
+          <div
+            class="hero-glow-bg w-full h-[670px] absolute z-10 bottom-0"
+          ></div>
+          <span class="hidden lg:block">
+          <br><br><br><br><br>
+          </span>
+          <div class="wrapper">
+                    <div class="max-w-[1016px] relative z-30 mx-auto pt-14 pb-16">
+                      <!-- <p class="text-center text-white/50 text-lg font-medium">
+                        Our partners...
+                      </p> -->
+                      <div class="flex flex-wrap justify-center items-center gap-7 md:gap-14 mt-10" style="background-color: rgba(255, 255, 255, 0.228); padding: 20px; border-radius: 20px;">
+              <img src="{% static 'assets/images/brands/YII.svg' %}" style="height: 60px;" />
+              <img src="{% static 'assets/images/brands/TEAM.png' %}" style="height: 60px;" />
+              <img src="{% static 'assets/images/brands/thompson.jpg' %}" style="height: 60px;" />
+              <img src="{% static 'assets/images/brands/MTV.png' %}" style="height: 60px;" />
+              <img src="{% static 'assets/images/brands/TECH.png' %}" style="height: 60px;" />
+                      </div>
+                    </div>
+                  </div>
+          <div class="hidden lg:block">
+            <!-- <img
+              src="{% static 'assets/images/hero/shape-left-1.svg'%}"
+              class="absolute top-14 left-16 floating-1"
+              alt=""
+            />
+            <img
+              src="{% static 'assets/images/hero/shape-left-2.svg'%}"
+              class="absolute left-[145px] top-[298px] floating-2"
+              alt=""
+            />
+            <img
+              src="{% static 'assets/images/hero/shape-right-1.svg'%}"
+              class="absolute right-16 top-[108px] floating-3"
+              alt=""
+            />
+            <img
+              src="{% static 'assets/images/hero/shape-right-2.svg'%}"
+              class="absolute top-[316px] right-[298px] floating-4"
+              alt=""
+            /> -->
+          </div>
+        </section>
+
+        <!-- Hero End -->
+
+        <!-- Core Feature Start -->
+        <section class="py-28 bg-gray-50 dark:bg-white/[0.01]">
+          <div class="wrapper">
+            <div class="max-w-2xl mx-auto mb-12 text-center">
+              <h2
+                class="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg"
+              >
+                Our programs
+              </h2>
+
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 sm:gap-8"
+            >
+              <div
+                class="core-feature-wrapper bg-white p-9 border border-gray-200 dark:border-white/[0.03] dark:bg-white/[0.05]"
+              >
+                <div class="core-feature-icon mb-9">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                  >
+                    <path
+                      d="M25.902 5.41671H9.16675C7.09568 5.41671 5.41675 7.09564 5.41675 9.16671V30.8334C5.41675 32.9044 7.09568 34.5834 9.16675 34.5834H30.8334C32.9045 34.5834 34.5834 32.9044 34.5834 30.8334V14.0971L28.9827 19.6978C27.9748 20.7057 26.6527 21.3388 25.2356 21.4922L22.3241 21.8072C21.1953 21.9293 20.0719 21.5335 19.269 20.7306C18.4662 19.9277 18.0703 18.8044 18.1924 17.6755L18.5075 14.764C18.6608 13.3469 19.2939 12.0248 20.3018 11.0169L25.902 5.41671Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M34.7914 4.18764C33.6524 3.04861 31.8056 3.04862 30.6666 4.18765L29.524 5.33025L34.6694 10.4756L35.812 9.33301C36.951 8.19399 36.951 6.34725 35.812 5.20822L34.7914 4.18764Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M32.9016 12.2434L27.7562 7.09801L22.0695 12.7847C21.4648 13.3894 21.085 14.1827 20.993 15.0329L20.6779 17.9445C20.6372 18.3208 20.7692 18.6952 21.0368 18.9628C21.3044 19.2305 21.6789 19.3624 22.0551 19.3217L24.9667 19.0067C25.8169 18.9147 26.6102 18.5348 27.2149 17.9301L32.9016 12.2434Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3
+                  class="mb-4 text-gray-800 dark:text-white/90 font-bold text-xl md:text-2xl max-w-[312px]"
+                >
+                  Inheritance
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                  Inheritance (Meros) is a TALIMY initiative that reconnects Uzbek youth with the intellectual legacy of scholars like Al-Khwarizmi, Al-Beruni, and Mirzo Ulugbek, transforming their discoveries into accessible educational materials distributed to 40,000+ schools nationwide. By bridging past and present, it inspires students to recognize that curiosity and innovation are part of their heritage and encourages them to carry this legacy forward.
+                </p>
+              </div>
+              <div
+                class="core-feature-wrapper bg-white p-9 border border-gray-200 dark:border-white/[0.03] dark:bg-white/[0.05]"
+              >
+                <div class="core-feature-icon mb-9">
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M14.2711 30.0755C14.1949 28.19 12.9483 26.4182 11.2671 24.7764C8.94449 22.508 7.50024 19.3382 7.50024 15.8332C7.50024 8.92972 13.0966 3.33337 20.0001 3.33337C26.9034 3.33337 32.4997 8.92972 32.4997 15.8332C32.4997 19.3379 31.0557 22.5077 28.7334 24.7759C26.9982 26.4707 25.7261 28.3037 25.7261 30.2574V32.9167C25.7261 34.9877 24.0472 36.6667 21.9761 36.6667H18.0211C15.9501 36.6667 14.2711 34.9877 14.2711 32.9167V30.0755ZM10.0002 15.8332C10.0002 10.3104 14.4773 5.83337 20.0001 5.83337C25.5227 5.83337 29.9997 10.3104 29.9997 15.8332C29.9997 18.6374 28.8472 21.1702 26.9866 22.9875C25.7512 24.194 24.4672 25.7095 23.7651 27.5H16.2356C15.5333 25.7097 14.2491 24.1942 13.0139 22.9879C11.153 21.1705 10.0002 18.6375 10.0002 15.8332ZM16.7711 30.3549C16.7736 30.323 16.7747 30.2907 16.7747 30.2582C16.7747 30.1814 16.7736 30.105 16.7711 30.0292V30H23.2261V32.9167C23.2261 33.607 22.6666 34.1667 21.9761 34.1667H18.0211C17.3307 34.1667 16.7711 33.607 16.7711 32.9167V30.3549Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M10.0002 15.8332C10.0002 10.3104 14.4773 5.83337 20.0001 5.83337C25.5227 5.83337 29.9997 10.3104 29.9997 15.8332C29.9997 18.6374 28.8472 21.1702 26.9866 22.9875C25.7512 24.194 24.4672 25.7095 23.7651 27.5H16.2356C15.5333 25.7097 14.2491 24.1942 13.0139 22.9879C11.153 21.1705 10.0002 18.6375 10.0002 15.8332Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M2.08325 15.8334C2.08325 15.143 2.6429 14.5834 3.33325 14.5834H4.99992C5.69027 14.5834 6.24992 15.143 6.24992 15.8334C6.24992 16.5237 5.69027 17.0834 4.99992 17.0834H3.33325C2.6429 17.0834 2.08325 16.5237 2.08325 15.8334Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M6.19137 6.41744C5.5935 6.07225 4.82902 6.2771 4.48383 6.87497C4.13867 7.47283 4.3435 8.23732 4.94137 8.5825L6.38475 9.41583C6.98262 9.76102 7.7471 9.55617 8.09228 8.9583C8.43745 8.36043 8.23262 7.59595 7.63475 7.25077L6.19137 6.41744Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M4.48383 24.7916C4.13867 24.1938 4.3435 23.4293 4.94137 23.0841L6.38475 22.2508C6.98262 21.9056 7.7471 22.1105 8.09228 22.7083C8.43745 23.3061 8.23262 24.0706 7.63475 24.4158L6.19137 25.2491C5.5935 25.5943 4.82902 25.3895 4.48383 24.7916Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M35.0002 14.5834C34.3099 14.5834 33.7502 15.143 33.7502 15.8334C33.7502 16.5237 34.3099 17.0834 35.0002 17.0834H36.6669C37.3572 17.0834 37.9169 16.5237 37.9169 15.8334C37.9169 15.143 37.3572 14.5834 36.6669 14.5834H35.0002Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M31.9091 22.7083C32.2543 22.1105 33.0188 21.9056 33.6166 22.2508L35.06 23.0841C35.658 23.4293 35.8628 24.1938 35.5176 24.7916C35.1725 25.3895 34.408 25.5943 33.81 25.2491L32.3666 24.4158C31.7688 24.0706 31.564 23.3061 31.9091 22.7083Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M32.3666 7.25077C31.7688 7.59595 31.564 8.36043 31.9091 8.9583C32.2543 9.55617 33.0188 9.76102 33.6166 9.41583L35.06 8.5825C35.658 8.23732 35.8628 7.47283 35.5176 6.87497C35.1725 6.2771 34.408 6.07225 33.81 6.41744L32.3666 7.25077Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3
+                  class="mb-4 text-gray-800 dark:text-white/90 font-bold text-xl md:text-2xl max-w-[312px]"
+                >
+                  Research Forum
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                  The TALIMY Research Forum is a highly selective national program that brings together the most promising young researchers from schools and universities in Uzbekistan, providing two months of free mentorship and hands-on training in research fundamentals under the guidance of six professors and four supervisors. Graduates gain practical research experience, join TALIMY’s mentor network to lead sessions in their own institutions, and have their work published in the TALIMY Journal, with the inaugural Forum launching in November 2025.
+              </div>
+              <div
+                class="core-feature-wrapper bg-white p-9 border border-gray-200 dark:border-white/[0.03] dark:bg-white/[0.05]"
+              >
+                <div class="core-feature-icon mb-9">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M21.2499 4.58337C21.2499 3.89302 20.6903 3.33337 19.9999 3.33337C19.3096 3.33337 18.7499 3.89302 18.7499 4.58337V7.50004H9.58325C7.51219 7.50004 5.83325 9.17897 5.83325 11.25V15.4167H5.41658C4.26599 15.4167 3.33325 16.3494 3.33325 17.5V22.5C3.33325 23.6507 4.26599 24.5834 5.41658 24.5834H5.83325V28.75C5.83325 30.821 7.51219 32.5 9.58325 32.5H30.4166C32.4876 32.5 34.1666 30.821 34.1666 28.75V24.5834H34.5833C35.7339 24.5834 36.6666 23.6507 36.6666 22.5V17.5C36.6666 16.3494 35.7339 15.4167 34.5833 15.4167H34.1666V11.25C34.1666 9.17897 32.4876 7.50004 30.4166 7.50004H21.2499V4.58337ZM15.8409 14.375C16.9915 14.375 17.9242 15.3077 17.9242 16.4583C17.9242 17.609 16.9915 18.5418 15.8409 18.5418C14.6903 18.5418 13.7576 17.609 13.7576 16.4583C13.7576 15.3077 14.6903 14.375 15.8409 14.375ZM26.2426 16.4583C26.2426 15.3077 25.3098 14.375 24.1593 14.375C23.0086 14.375 22.0759 15.3077 22.0759 16.4583C22.0759 17.609 23.0086 18.5418 24.1593 18.5418C25.3098 18.5418 26.2426 17.609 26.2426 16.4583ZM16.6824 22.0097C16.2523 21.4697 15.4659 21.3803 14.9258 21.8103C14.3857 22.2403 14.2965 23.0268 14.7265 23.5668C15.9589 25.1148 17.8635 26.1107 20 26.1107C22.1365 26.1107 24.0414 25.1148 25.2737 23.5668C25.7037 23.0268 25.6145 22.2403 25.0744 21.8103C24.5344 21.3803 23.7479 21.4697 23.3179 22.0097C22.5394 22.9875 21.3429 23.6107 20 23.6107C18.6572 23.6107 17.4607 22.9875 16.6824 22.0097Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3
+                  class="mb-4 text-gray-800 dark:text-white/90 font-bold text-xl md:text-2xl max-w-[312px]"
+                >
+                  Online Academy
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                  The TALIMY Research Forum is a highly selective national program that brings together the most promising young researchers from schools and universities in Uzbekistan, providing two months of free mentorship and hands-on training in research fundamentals under the guidance of six professors and four supervisors. Graduates gain practical research experience, join TALIMY’s mentor network to lead sessions in their own institutions, and have their work published in the TALIMY Journal, with the inaugural Forum launching in November 2025.
+                </p>
+              </div>
+              <div
+                class="core-feature-wrapper bg-white p-9 border border-gray-200 dark:border-white/[0.03] dark:bg-white/[0.05]"
+              >
+                <div class="core-feature-icon mb-9">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M3.33329 20C3.33329 10.7953 10.7952 3.33337 19.9999 3.33337C29.2048 3.33337 36.6666 10.7953 36.6666 20C36.6666 29.2047 29.2048 36.6667 19.9999 36.6667H4.58329C4.07772 36.6667 3.62192 36.3622 3.42844 35.895C3.23497 35.428 3.3419 34.8904 3.6994 34.5329L7.36397 30.8682C4.85285 27.951 3.33329 24.152 3.33329 20ZM15.8409 13.125C16.9915 13.125 17.9242 14.0577 17.9242 15.2083C17.9242 16.3589 16.9915 17.2918 15.8409 17.2918C14.6903 17.2918 13.7576 16.3589 13.7576 15.2083C13.7576 14.0577 14.6903 13.125 15.8409 13.125ZM26.2426 15.2083C26.2426 14.0577 25.3099 13.125 24.1593 13.125C23.0086 13.125 22.0759 14.0577 22.0759 15.2083C22.0759 16.3589 23.0086 17.2918 24.1593 17.2918C25.3099 17.2918 26.2426 16.3589 26.2426 15.2083ZM16.6823 20.7597C16.2523 20.2197 15.4659 20.1303 14.9258 20.5603C14.3857 20.9903 14.2965 21.7768 14.7265 22.3168C15.9589 23.8648 17.8635 24.8607 20.0002 24.8607C22.1367 24.8607 24.0413 23.8648 25.2737 22.3168C25.7037 21.7768 25.6145 20.9903 25.0743 20.5603C24.5343 20.1303 23.7478 20.2197 23.3178 20.7597C22.5393 21.7375 21.343 22.3607 20.0002 22.3607C18.6573 22.3607 17.4608 21.7375 16.6823 20.7597Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+                <h3
+                  class="mb-4 text-gray-800 dark:text-white/90 font-bold text-xl md:text-2xl max-w-[312px]"
+                >
+                  Regional Network
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                  The Regional Network is TALIMY’s nationwide initiative connecting young researchers and mentors across eight regions of Uzbekistan, hosting monthly sessions in collaboration with local universities and Youth Affairs centers to bring research culture directly to communities. By developing a standardized curriculum with university experts, the program ensures all participants receive structured training in research fundamentals, academic writing, and project methodology, advancing TALIMY’s mission to make research accessible to every youth.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Core Feature End -->
+         <!-- https://www.youtube.com/embed/u5Pme31UDhQ?si=uWoSCG-RSOliLHOG -->
+
+        <!-- Full-width Video Section -->
+
+        <!-- Tab Start -->
+        <section class="py-14 md:py-28 dark:bg-dark-primary">
+          <div class="wrapper">
+            <div class="max-w-2xl mx-auto mb-12 text-center">
+              <h2
+                class="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg"
+              >
+                About Talimy
+              </h2>
+              <p
+                class="max-w-2xl mx-auto leading-6 text-gray-500 dark:text-gray-400"
+              >
+                Talimy is a pioneering national youth research initiative dedicated to building Uzbekistan's research culture from the ground up. As an official initiative under the Youth Affairs Agency of the Republic of Uzbekistan, we empower young minds to explore, question, and contribute to the nation's intellectual and scientific growth.
+              </p>
+                  <br>
+                  <iframe width="100%" height="500px" src="https://www.youtube.com/embed/u5Pme31UDhQ?si=LNXZ6UjG2yWR006K&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                  <br>
+                
+              <p
+                class="max-w-2xl mx-auto leading-6 text-gray-500 dark:text-gray-400"
+              >
+                Talimy operates as an official national initiative, bringing together dedicated organizers, passionate researchers, and educational institutions across all regions of Uzbekistan to build a sustainable research culture for future generations.
+              </p>  
+            </div>
+          </div>
+          <div class="wrapper text-center">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-12">
+      Organizational Scale
+    </h2>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+    >
+      <!-- Card 1 -->
+      <div
+        class="bg-white dark:bg-dark-secondary border border-gray-100 dark:border-gray-800 rounded-2xl p-8 shadow-theme-lg flex flex-col items-center justify-center"
+      >
+        <span
+          class="text-4xl font-extrabold text-primary-500 dark:text-primary-400"
+          >120+</span
+        >
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Team Members</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div
+        class="bg-white dark:bg-dark-secondary border border-gray-100 dark:border-gray-800 rounded-2xl p-8 shadow-theme-lg flex flex-col items-center justify-center"
+      >
+        <span
+          class="text-4xl font-extrabold text-primary-500 dark:text-primary-400"
+          >80+</span
+        >
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Active Researchers</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div
+        class="bg-white dark:bg-dark-secondary border border-gray-100 dark:border-gray-800 rounded-2xl p-8 shadow-theme-lg flex flex-col items-center justify-center"
+      >
+        <span
+          class="text-4xl font-extrabold text-primary-500 dark:text-primary-400"
+          >15+</span
+        >
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Regional Chapters</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div
+        class="bg-white dark:bg-dark-secondary border border-gray-100 dark:border-gray-800 rounded-2xl p-8 shadow-theme-lg flex flex-col items-center justify-center"
+      >
+        <span
+          class="text-4xl font-extrabold text-primary-500 dark:text-primary-400"
+          >50+</span
+        >
+        <p class="mt-2 text-gray-600 dark:text-gray-300">Schools Connected</p>
+      </div>
+    </div>
+          </div>
+
+        </section>
+        
+        <!-- Tab End -->
+
+        <!-- Benefits Start -->
+        <section class="bg-gray-900 py-14 md:py-28">
+          <div class="wrapper">
+            <div class="max-w-2xl mx-auto mb-12 text-center">
+              <h2
+                class="max-w-lg mx-auto mb-3 font-bold text-center text-white dark:text-white/90 text-3xl md:text-title-lg"
+              >
+                The key benefits of Talimy
+              </h2>
+              <p
+                class="max-w-2xl mx-auto text-base font-normal leading-6 text-white/50"
+              >
+                Unlock the Potential of Learning. Discover the tools that help students
+                master academic writing with confidence and creativity.
+              </p>
+            </div>
+
+            <div class="max-w-[1008px] mx-auto">
+              <div class="grid lg:grid-cols-12 gap-8 auto-rows-fr">
+                <!-- Card 1 -->
+                <div class="lg:col-span-6">
+                  <div
+                    class="relative flex flex-col justify-between bg-primary-500 rounded-[20px] p-9 md:p-13 h-full"
+                  >
+                    <div class="max-w-sm mb-32">
+                      <h3 class="font-bold text-white text-2xl md:text-3xl mb-4">
+                        Accessible Learning Opportunities
+                      </h3>
+                      <p class="text-base text-white/70">
+                        Easy access to quality academic writing programs, mentorship,
+                        and structured learning resources.
+                      </p>
+                    </div>
+                    <div>
+                      <img
+                        src="{% static 'assets/images/logo.png'%}"
+                        class="absolute left-8 top-[61%] floating-1"
+                        alt=""
+                        style="height: 40px; border-radius: 10px;"
+                      />
+                      <img
+                        src="{% static 'assets/images/logo.png'%}"
+                        class="absolute right-28 top-[55%] floating-2"
+                        alt=""
+                        style="height: 40px; border-radius: 10px;"
+                      />
+                      <img
+                        src="{% static 'assets/images/logo.png'%}"
+                        class="right-8 absolute bottom-[15%] floating-3"
+                        alt=""
+                        style="height: 40px; border-radius: 10px;"
+                      />
+                      <img
+                        src="{% static 'assets/images/benefits/laptop2.png'%}"
+                        class="-mb-8 md:-mb-11"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="lg:col-span-6">
+                  <div
+                    class="benefits-bg rounded-[20px] p-12 overflow-hidden h-full flex flex-col justify-between"
+                  >
+                    <div>
+                      <img src="{% static 'assets/images/benefits/scientist.png'%}" alt="" />
+                    </div>
+                    <div>
+                      <h3 class="font-bold max-w-xs text-white text-2xl md:text-3xl mb-4">
+                        Skill Development for the Future
+                      </h3>
+                      <p class="text-base max-w-sm text-white/70">
+                        Through its initiatives, Talimy equips students with research,
+                        writing, and critical-thinking skills needed for future success.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="lg:col-span-12">
+                  <div
+                    class="lg:px-12 p-8 bg-[#2D0B70] lg:pb-0 lg:p-12 relative rounded-[20px] h-full lg:flex lg:flex-row justify-between bg-cover flex-col gap-5"
+                  >
+                    <div class="max-w-sm relative z-10">
+                      <h3 class="font-bold text-white text-2xl md:text-3xl mb-4">
+                        Improved Research and Critical Thinking Skills
+                      </h3>
+                      <p class="text-base text-white/70 mb-8">
+                        By teaching proper structure, source evaluation, and argument
+                        development, Talimy strengthens students’ ability to think
+                        critically and write with academic integrity.
+                      </p>
+                      <a
+                        href="{%url 'contact'%}"
+                        class="font-medium inline-block text-sm text-white rounded-full bg-primary-500 hover:bg-primary-600 transition py-3 px-6"
+                      >
+                        Register now
+                      </a>
+                    </div>
+                    <div>
+                      <img
+                        src="{% static 'assets/images/benefits/bn-3.svg'%}"
+                        class="hidden lg:block relative z-10"
+                        alt=""
+                      />
+                    </div>
+                    <img
+                      src="{% static 'assets/images/benefits/blur-shape.png'%}"
+                      alt=""
+                      class="h-full w-full -z-0 absolute top-0 right-0"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <style>
+          #member{
+            transition: all 0.5s ease;
+          }
+          #member:hover{
+            width: 80px;
+            height: 80px;
+
+          }
+        </style>
+<section id="team" class="md:py-28 py-14 relative" x-data="{ showAll: false }">
+  <div class="wrapper">
+    <div>
+      <div class="max-w-2xl mx-auto mb-12 text-center">
+        <h2 class="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
+          Our TEAM
+        </h2>
+        <p class="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
+          Meet the team shaping the future of learning. From passionate educators to dedicated developers, we work together to create engaging, accessible, and innovative educational experiences for every student.
+        </p>
+      </div>
+
+      <!-- Team Grid -->
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+        {% for member in members %}
+        <div
+          class="p-2 bg-gray-50 dark:bg-white/5 dark:border-gray-800 dark:hover:border-white/10 border rounded-[20px] border-gray-100 hover:border-primary-200 transition"
+          x-show="showAll || {{ forloop.counter }} <= 6"
+        >
+          <div class="flex items-center p-3 mb-3 bg-white/90 dark:bg-white/[0.03] rounded-2xl">
+            <img 
+            id="member"
+              src="{{member.image.url}}" 
+              alt="{{member.name}}" 
+              class="w-[52px] h-[52px] object-cover ring-2 ring-white dark:ring-gray-700 mr-4 rounded-full drop-shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-300 hover:w-[80px] hover:h-[80px]"
+            >
+            <div>
+              <h3 class="text-gray-800 font-base dark:text-white/90">{{member.name}}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400">{{member.role}}</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white/90 dark:bg-white/[0.03]">
+            <p class="text-base leading-6 text-gray-700 dark:text-gray-400">
+              {{member.description}}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Show More Button -->
+      <div class="mt-8 text-center relative z-10">
+        <button 
+          @click="showAll = !showAll" 
+          class="inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 px-6 py-3.5 text-sm font-medium text-gray-800 bg-white border border-gray-200 dark:hover:bg-gray-900 rounded-full shadow-theme-xs hover:bg-gray-50 focus:outline-none"
+        >
+          <span x-text="showAll ? 'Show less...' : 'Show more...'"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Gradient -->
+  <template x-if="!showAll">
+    <div class="white-gradient h-[264px] w-full absolute bottom-0"></div>
+  </template>
+</section>
+
+        <!-- Benefits End -->
+
+        <!-- Testimonial Start -->
+
+        <!-- Testimonial End -->
+
+        <!-- Price Start -->
+
+        <!-- Price End -->
+
+        <!-- Faq Start -->
+        <section id="faq" class="py-14 md:py-28">
+          <div class="wrapper">
+            <div class="max-w-2xl mx-auto mb-12 text-center">
+              <h2
+                class="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg"
+              >
+                Frequently Asked Questions
+              </h2>
+              <p
+                class="max-w-md mx-auto leading-6 text-gray-500 dark:text-gray-400"
+              >
+                Answered all frequently asked questions, Still confused? feel
+                free contact with us
+              </p>
+            </div>
+            <div class="max-w-[600px] mx-auto">
+              <!-- Parent component with shared state -->
+              <div class="space-y-4" x-data="{ activeItem: 1 }">
+                <!-- FAQ Item 1 -->
+
+                <!-- FAQ Item 2 -->
+                 {%for faq in faqs%}
+                 
+                <div class="pb-5 border-b border-gray-200 dark:border-gray-800">
+                  <button
+                    type="button"
+                    class="flex items-center justify-between w-full text-left"
+                    @click="activeItem = activeItem === {{forloop.counter}} ? null : 2"
+                  >
+                    <span
+                      class="text-lg font-medium text-gray-800 dark:text-white/90"
+                      >{{faq.question}}</span
+                    >
+                    <span class="flex-shrink-0 ml-6">
+                      <span
+                        x-show="activeItem === {{forloop.counter}}"
+                        class="text-xl text-gray-400"
+                      >
+                        <svg
+                          width="24"
+                          height="25"
+                          viewBox="0 0 24 25"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_9283_3094)">
+                            <path
+                              d="M5 11.9194V13.9194H19V11.9194H5Z"
+                              fill="currentColor"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_9283_3094">
+                              <rect
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                transform="translate(0 0.919434)"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                      <span
+                        x-show="activeItem !== {{forloop.counter}}"
+                        class="text-xl text-gray-400"
+                        style="display: none"
+                      >
+                        <svg
+                          width="24"
+                          height="25"
+                          viewBox="0 0 24 25"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g clip-path="url(#clip0_9283_3101)">
+                            <path
+                              d="M11 11.9194V5.91943H13V11.9194H19V13.9194H13V19.9194H11V13.9194H5V11.9194H11Z"
+                              fill="currentColor"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_9283_3101">
+                              <rect
+                                width="24"
+                                height="24"
+                                fill="currentColor"
+                                transform="translate(0 0.919434)"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </span>
+                  </button>
+                  <div
+                    class="mt-4"
+                    x-show="activeItem === {{forloop.counter}}"
+                    style="display: none"
+                  >
+                    <p
+                      class="text-base leading-7 text-gray-500 dark:text-gray-400"
+                    >
+                      {{faq.answer}}
+                    </p>
+                  </div>
+                </div>
+
+                {%endfor%}
+
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Faq End -->
+{%endblock%}
+ 
